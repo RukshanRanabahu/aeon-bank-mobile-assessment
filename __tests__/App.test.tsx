@@ -4,10 +4,15 @@
 
 import React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
+
+jest.mock('../src/services/transactionService', () => ({
+  getTransactions: jest.fn().mockResolvedValue([]),
+}));
+
 import App from '../App';
 
 test('renders correctly', async () => {
-  await ReactTestRenderer.act(() => {
+  await ReactTestRenderer.act(async () => {
     ReactTestRenderer.create(<App />);
   });
 });
